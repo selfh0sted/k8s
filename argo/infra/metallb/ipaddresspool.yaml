@@ -3,6 +3,10 @@ kind: IPAddressPool
 metadata:
   name: first-pool
   namespace: metallb-system
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   addresses:
     - 10.0.100.1/24
