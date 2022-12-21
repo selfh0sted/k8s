@@ -14,15 +14,16 @@ spec:
     chart: metallb
     repoURL: https://charts.bitnami.com/bitnami
     targetRevision: ~4.1.13
-    helm:
-      values: |
-        configInline:
-          address-pools:
-          - name: default
-            protocol: layer2
-            addresses:
-            - 10.0.204.0/22
   syncPolicy:
     automated: {}
     syncOptions:
       - CreateNamespace=true
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: first-pool
+  namespace: metallb
+spec:
+  addresses:
+    - 10.0.100.0/24
