@@ -1,21 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: metallb
+  name: metallbhelm
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: argocd
+    namespace: metallb-system
     server: https://kubernetes.default.svc
   project: default
   source:
-    repoURL: 'https://github.com/selfh0sted/k8s'
-    path: argo/infra/metallb
-    targetRevision: HEAD
-    directory:
-      recurse: true
+    chart: metallb
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: ~4.1.13
   syncPolicy:
     automated: {}
     syncOptions:
