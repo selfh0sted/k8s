@@ -7,7 +7,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: infra
+    namespace: metallb-system
     server: https://kubernetes.default.svc
   project: default
   source:
@@ -23,7 +23,7 @@ apiVersion: metallb.io/v1beta1
 kind: IPAddressPool
 metadata:
   name: first-pool
-  namespace: metallb
+  namespace: metallb-system
 spec:
   addresses:
     - 10.0.100.0/24
