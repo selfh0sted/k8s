@@ -1,0 +1,28 @@
+apiVersion: kubeone.k8c.io/v1beta2
+kind: KubeOneCluster
+name: bm-cluster
+versions:
+  kubernetes: '1.24.0'
+cloudProvider:
+  none: {}
+
+controlPlane:
+  hosts:
+    - publicAddress: '10.0.1.10'
+      privateAddress: '172.18.0.1'
+      sshUsername: ubuntu
+      sshPrivateKeyFile: '/mnt/c/Users/danie/.ssh/id_ed25519'
+      taints:
+        - key: "node-role.kubernetes.io/master"
+          effect: "NoSchedule"
+staticWorkers:
+  hosts:
+    - publicAddress: '10.0.1.11'
+      privateAddress: '172.18.0.2'
+      sshUsername: ubuntu
+      sshPrivateKeyFile: '/mnt/c/Users/danie/.ssh/id_ed25519'
+apiEndpoint:
+  host: '10.0.1.10'
+  port: 6443
+machineController:
+  deploy: false
