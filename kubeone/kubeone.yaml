@@ -8,21 +8,21 @@ cloudProvider:
 
 controlPlane:
   hosts:
-    - publicAddress: '10.0.1.10'
+    - publicAddress: '10.0.0.60'
       privateAddress: '172.18.0.1'
       sshUsername: ubuntu
-      sshPrivateKeyFile: '/mnt/c/Users/danie/.ssh/id_ed25519'
-      taints:
-        - key: "node-role.kubernetes.io/master"
-          effect: "NoSchedule"
-staticWorkers:
-  hosts:
-    - publicAddress: '10.0.1.11'
-      privateAddress: '172.18.0.2'
-      sshUsername: ubuntu
-      sshPrivateKeyFile: '/mnt/c/Users/danie/.ssh/id_ed25519'
+      sshPrivateKeyFile: '~/.ssh/id_ed25519'
+#      taints:
+#        - key: "node-role.kubernetes.io/master"
+#          effect: "NoSchedule"
+#staticWorkers:
+#  hosts:
+#    - publicAddress: '10.0.1.11'
+#      privateAddress: '172.18.0.2'
+#      sshUsername: ubuntu
+#      sshPrivateKeyFile: '~/.ssh/id_ed25519'
 apiEndpoint:
-  host: '10.0.1.10'
+  host: '10.0.0.60'
   port: 6443
 machineController:
   deploy: false

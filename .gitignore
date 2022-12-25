@@ -1,1 +1,10 @@
 .idea
+user.auto.tfvars
+kubeone/*.tar.gz
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+kubeone_1.5.4_darwin_amd64
+cluster.auto.tfvars
+ansible/ssh_key_terraform
