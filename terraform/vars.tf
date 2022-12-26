@@ -1,4 +1,4 @@
-# user configuration
+# user 0_configuration
 
 variable "pm_api_url" {
     description = "Proxmox API endpoint, e.g. https://<ip>:8006/api2/json"
@@ -20,7 +20,7 @@ variable "pm_target_node" {
     description = "Proxmox node to start the vm on"
     type = string
     default ="pve"
-    
+
 }
 
 variable "pm_tls_insecure" {
@@ -47,7 +47,7 @@ variable "ssh_key" {
 }
 
 
-# cluster configuration
+# cluster 0_configuration
 
 variable "controlplane_count" {
     description = "Number of controlplane nodes"

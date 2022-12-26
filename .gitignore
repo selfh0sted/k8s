@@ -8,3 +8,5 @@ kubeone/*.tar.gz
 kubeone_1.5.4_darwin_amd64
 cluster.auto.tfvars
 ansible/ssh_key_terraform
+ansible/ssh_key
+.vagrant

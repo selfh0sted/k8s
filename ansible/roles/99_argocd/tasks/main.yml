@@ -1,0 +1,25 @@
+## TODO: Use kubernetes.core collection
+
+## Only create if not exists: https://stackoverflow.com/questions/63135361/how-to-create-kubernetes-namespace-if-it-does-not-exist
+
+- name: ensure 99_argocd namespace exists
+  shell: kubectl create namespace 99_argocd --dry-run=client -o yaml | kubectl apply -f -
+
+- name: ensure 99_argocd configmap manifest is present
+  ansible.builtin.template:
+    src: templates/configmap.yaml
+    dest: /tmp/99_argocd-configmap.yaml
+
+- name: ensure 99_argocd configmap is present
+  shell: kubectl apply -n 99_argocd -f /tmp/99_argocd-configmap.yaml
+
+- name: ensure 99_argocd is installed
+  shell: kubectl apply -n 99_argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+- name: ensure 99_argocd bootstrap manifest is present
+  ansible.builtin.template:
+    src: templates/application.yaml
+    dest: /tmp/99_argocd-bootstrap.yaml
+
+- name: ensure 99_argocd bootstrap application is installed
+  shell: kubectl apply -n 99_argocd -f /tmp/99_argocd-bootstrap.yaml

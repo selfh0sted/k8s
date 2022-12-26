@@ -4,7 +4,7 @@ metadata:
   name: first-pool
   namespace: metallb-system
   finalizers:
-    - resources-finalizer.argocd.argoproj.io
+    - resources-finalizer.99_argocd.argoproj.io
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:

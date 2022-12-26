@@ -1,0 +1,52 @@
+---
+- hosts: 127.0.0.1
+  pre_tasks:
+    - name: convert ssh_key from CRLF to LF line endings
+      template:
+        src: ./ssh_key_terraform
+        dest: ./ssh_key
+# Configuration and Installation
+- hosts: all
+  roles:
+    - role: 0_configuration
+      tags:
+        - config
+    - role: 1_installation
+      tags:
+        - installation
+
+# Loadbalancer
+- hosts: controlplane
+  roles:
+    - role: 2_loadbalancer
+      tags:
+        - loadbalancer
+# Kubeadm init
+- hosts: controlplane-first
+  roles:
+    - role: 3_kubeadm-init
+      tags:
+        - kubeadm
+        - kubeadm-init
+
+# Kubeadm join controlplane
+- hosts: controlplane-rest
+  roles:
+    - role: 4_kubeadm-join-master
+      tags:
+        - kubeadm
+        - kubeadm-join
+
+# Kubeadm join worker
+- hosts: worker
+  roles:
+    - role: 6_kubeadm-join-worker
+      tags:
+        - kubeadm
+        - kubeadm-join
+- hosts: controlplane-first
+  roles:
+    - role: 99_argocd
+      tags:
+        - never
+        - bootstrap

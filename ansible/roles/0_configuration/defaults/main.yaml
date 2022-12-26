@@ -1,0 +1,3 @@
+files:
+  - name: k8s.conf
+    dir: /etc/modules-load.d/

@@ -1,0 +1,52 @@
+#- name: Ensure directory {{item.dest}} exists
+#  become: yes
+#  file:
+#    path: "{{item.dir}}"
+#    state: directory
+#  loop: "{{files}}"
+#
+#- name: Ensure 0_configuration {{item.src}} is present
+#  become: yes
+#  ansible.builtin.template:
+#    src: "{{item.name}}"
+#    dest: "{{item.dir}}/{{item.name}}"
+#  loop: "{{files}}"
+- name: Add overlay module
+  become: yes
+  community.general.modprobe:
+    name: overlay
+    state: present
+- name: Add br_netfilter module
+  become: yes
+  community.general.modprobe:
+    name: br_netfilter
+    state: present
+- become: yes
+  ansible.posix.sysctl:
+    sysctl_set: yes
+    name: net.ipv4.ip_forward
+    value: '1'
+    state: present
+    reload: yes
+- become: yes
+  ansible.posix.sysctl:
+    sysctl_set: yes
+    name: net.bridge.bridge-nf-call-iptables
+    value: '1'
+    state: present
+    reload: yes
+- become: yes
+  ansible.posix.sysctl:
+    sysctl_set: yes
+    name: net.bridge.bridge-nf-call-ip6tables
+    value: '1'
+    state: present
+    reload: yes
+- name: Ensure that /etc/machine-id is absent
+  become: yes
+  ansible.builtin.file:
+    path: /etc/machine-id
+    state: absent
+- name: Ensure that /etc/machine-id gets populated
+  become: yes
+  shell: systemd-machine-id-setup

@@ -4,12 +4,13 @@ terraform {
       source = "Telmate/proxmox"
       version = "2.9.11"
     }
-#    ansible = {
-#      source = "nbering/ansible"
-#      version = "1.0.4"
-#    }
+    ansible = {
+      source = "nbering/ansible"
+      version = "1.0.4"
+    }
   }
 }
+
 
 provider "proxmox" {
     pm_api_url = var.pm_api_url
@@ -18,4 +19,4 @@ provider "proxmox" {
     pm_tls_insecure = var.pm_tls_insecure
 }
 
-#provider "ansible" {}
+provider "ansible" {}

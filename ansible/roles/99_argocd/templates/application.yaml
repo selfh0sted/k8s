@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap
+  namespace: 99_argocd
+  finalizers:
+  - resources-finalizer.99_argocd.argoproj.io
+spec:
+  destination:
+    namespace: 99_argocd
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: bootstrap
+    repoURL: https://github.com/danielr1996/k8s-gitops.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  syncPolicy:
+    automated: {}
