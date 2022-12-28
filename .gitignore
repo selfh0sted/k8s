@@ -10,3 +10,4 @@ cluster.auto.tfvars
 ansible/ssh_key_terraform
 ansible/ssh_key
 .vagrant
+ansible/kube.config.yaml

@@ -50,7 +50,6 @@
     - role: 7_bootstrap
       tags:
         - bootstrap
-        - never
 - hosts: all
   roles:
     - role: 99_reset
