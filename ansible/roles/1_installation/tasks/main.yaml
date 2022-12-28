@@ -28,3 +28,4 @@
   ansible.builtin.service:
     name: crio
     state: started
+    enabled: true

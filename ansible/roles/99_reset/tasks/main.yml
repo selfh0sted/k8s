@@ -1,0 +1,2 @@
+- name: Reset node
+  shell: sudo kubeadm reset

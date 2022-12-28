@@ -44,9 +44,16 @@
       tags:
         - kubeadm
         - kubeadm-join
+# Bootstrap additional addons like cni, storage, loadbalancer, etc.
 - hosts: controlplane-first
   roles:
-    - role: 99_argocd
+    - role: 7_bootstrap
       tags:
-        - never
         - bootstrap
+        - never
+- hosts: all
+  roles:
+    - role: 99_reset
+      tags:
+        - reset
+        - never

@@ -2,12 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: bootstrap
-  namespace: 99_argocd
+  namespace: 999_argocd
   finalizers:
-  - resources-finalizer.99_argocd.argoproj.io
+  - resources-finalizer.999_argocd.argoproj.io
 spec:
   destination:
-    namespace: 99_argocd
+    namespace: 999_argocd
     server: https://kubernetes.default.svc
   project: default
   source:

@@ -13,7 +13,7 @@ variable "pm_target_node" {}
 resource "proxmox_vm_qemu" "k8s-node" {
     name = var.name
     target_node = var.pm_target_node
-
+    onboot = true
     # Hardware Settings
     cores = var.cores
     memory = var.memory

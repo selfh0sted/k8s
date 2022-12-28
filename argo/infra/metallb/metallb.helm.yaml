@@ -2,9 +2,9 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: metallb
-  namespace: 99_argocd
+  namespace: 999_argocd
   finalizers:
-    - resources-finalizer.99_argocd.argoproj.io
+    - resources-finalizer.999_argocd.argoproj.io
 spec:
   destination:
     namespace: metallb-system

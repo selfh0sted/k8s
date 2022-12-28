@@ -1,0 +1,28 @@
+- name: Ensure pip is installed
+  become: yes
+  apt:
+    name: python3-pip
+    state: present
+- name: Ensure openshift python package exists
+  pip:
+    name:
+      - openshift
+- name: Ensure Calico Helm Repository exists
+  kubernetes.core.helm_repository:
+    name: "projectcalico"
+    repo_url: "https://projectcalico.docs.tigera.io/charts"
+- name: Ensure Tigera Operator is installed
+  kubernetes.core.helm:
+    name: tigera-operator
+    namespace: tigera-operator
+    create_namespace: true
+    chart_ref: projectcalico/tigera-operator
+    chart_version: v3.24.5
+- name: Ensure Calico Installation is present
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('ansible.builtin.file', 'templates/calico-installation.yaml') | from_yaml }}"
+  register: calico_installation
+- name: Ensure coredns is restarted
+  shell: "kubectl rollout restart --namespace kube-system deployment/coredns"
+  when: calico_installation.changed
