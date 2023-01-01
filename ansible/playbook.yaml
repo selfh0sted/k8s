@@ -5,6 +5,7 @@
       template:
         src: ./ssh_key_terraform
         dest: ./ssh_key
+        mode: 0600
 # Configuration and Installation
 - hosts: all
   roles:
@@ -45,10 +46,11 @@
         - kubeadm
         - kubeadm-join
 # Bootstrap additional addons like cni, storage, loadbalancer, etc.
-- hosts: controlplane-first
+- hosts: localhost
   roles:
     - role: 7_bootstrap
       tags:
+        - never
         - bootstrap
 - hosts: all
   roles:

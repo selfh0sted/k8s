@@ -6,12 +6,6 @@ packages:
     packages:
       - cri-o
   - apt_key:
-      id: "81BF832E2F19CD2AA0471959294AC4827C1A168A"
-      url: "https://baltocdn.com/helm/signing.asc"
-    apt_repository: "deb [arch=amd64] https://baltocdn.com/helm/stable/debian/ all main"
-    packages:
-      - helm
-  - apt_key:
       id: "2472D6D0D2F66AF87ABA8DA34D64390375060AA4"
       url: "https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_22.04/Release.key"
     apt_repository: "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_22.04/ /"
@@ -29,12 +23,3 @@ holdpackages:
   - kubelet
   - kubeadm
   - kubectl
-
-# echo "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/1.25/xUbuntu_22.04/ /"|sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable:cri-o:$CRIO_VERSION.list
-#curl -L https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:1.25/xUbuntu_22.04/Release.key | sudo apt-key add -
-
-
-# echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_22.04/ /"| sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
-# curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_22.04/Release.key | sudo apt-key add -
-
-#curl -L https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -

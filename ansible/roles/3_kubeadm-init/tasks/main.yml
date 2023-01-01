@@ -30,7 +30,8 @@
   become: yes
   ansible.builtin.fetch:
     src: /etc/kubernetes/admin.conf
-    dest: kube.config.yaml
+    dest: ~/.kube/config
+    mode: 0600
     flat: yes
 - name: get controlplane join command
   shell: echo $(kubeadm token create --print-join-command) --control-plane --certificate-key=$(sudo kubeadm init phase upload-certs --upload-certs | tail -1)

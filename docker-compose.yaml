@@ -1,0 +1,16 @@
+services:
+#  terraform:
+#    image: hashicorp/terraform:1.3.6
+#    working_dir: /project
+#    volumes:
+#      - ./terraform:/project
+  ansible:
+    network_mode: host
+    build:
+      context: container/ansible
+    environment:
+      ANSIBLE_TF_DIR: /project/terraform
+    working_dir: /project/ansible
+    volumes:
+      - .:/project
+      - ~/.kube/config:/root/.kube/config

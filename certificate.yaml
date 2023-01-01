@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: example-de
+  namespace: default
+spec:
+  secretName: example-de-tls
+  commonName: abc.dani.rip
+  dnsNames:
+    - abc.dani.rip
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer

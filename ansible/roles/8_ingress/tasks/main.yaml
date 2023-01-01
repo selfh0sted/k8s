@@ -1,0 +1,9 @@
+#- name: Ensure cert-manager is installed
+#  kubernetes.core.helm:
+#    name: cert-manager
+#    namespace: cert-manager
+#    create_namespace: true
+#    chart_ref: jetstack/cert-manager
+#    chart_version: v1.10.1
+#    values:
+#      installCRDs: true
