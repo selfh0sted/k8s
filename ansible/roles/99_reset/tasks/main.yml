@@ -1,2 +1,6 @@
 - name: Reset node
-  shell: sudo kubeadm reset
+  shell: sudo kubeadm reset -f
+- name: Change file ownership, group and permissions
+  ansible.builtin.file:
+    path: ~/cluster_initialized.txt
+    state: absent

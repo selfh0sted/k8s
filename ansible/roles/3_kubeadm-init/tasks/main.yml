@@ -1,4 +1,4 @@
-- name: Initialize kubeadm master nodes
+- name: Initialize kubeadm master node
   shell: >
     sudo kubeadm init \
     --control-plane-endpoint=10.0.100.1:6443 \ 
