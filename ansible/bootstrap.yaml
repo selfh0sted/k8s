@@ -1,11 +1,6 @@
 ---
-- hosts: 127.0.0.1
+- hosts: localhost
   pre_tasks:
-    - name: convert ssh_key from CRLF to LF line endings
-      template:
-        src: ./ssh_key_terraform
-        dest: ./ssh_key
-        mode: 0600
     - name: "ensure helm repository key is present"
       become: yes
       ansible.builtin.apt_key:
@@ -42,67 +37,11 @@
       pip:
         name:
           - openshift
-# Configuration and Installation
-- hosts: all
-  roles:
-    - role: setup
-      tags:
-        - config
-    - role: 1_installation
-      tags:
-        - never
-        - installation
-
-# Loadbalancer
-- hosts: controlplane
-  roles:
-    - role: 2_loadbalancer
-      tags:
-        - never
-        - loadbalancer
-# Kubeadm init
-- hosts: controlplane-first
-  roles:
-    - role: 3_kubeadm-init
-      tags:
-        - never
-        - kubeadm
-        - kubeadm-init
-
-# Kubeadm join controlplane
-- hosts: controlplane-rest
-  roles:
-    - role: 4_kubeadm-join-master
-      tags:
-        - never
-        - kubeadm
-        - kubeadm-join
-
-# Kubeadm join worker
-- hosts: worker
-  roles:
-    - role: 6_kubeadm-join-worker
-      tags:
-        - never
-        - kubeadm
-        - kubeadm-join
-# Bootstrap additional addons like cni, storage, loadbalancer, etc.
 - hosts: localhost
   roles:
-    - role: 7_bootstrap
-      tags:
-        - never
-        - bootstrap
-# Configure ingress
-- hosts: localhost
-  roles:
-    - role: 8_ingress
-      tags:
-        - never
-        - ingress
-- hosts: all
-  roles:
-    - role: 99_reset
-      tags:
-        - reset
-        - never
+    - name: metallb
+      tags: metallb
+    - name: argocd
+      tags: argocd
+    - name: ingress
+      tags: ingress
