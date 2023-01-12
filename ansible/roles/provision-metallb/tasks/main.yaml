@@ -1,0 +1,41 @@
+- name: Ensure Bitnami Helm Repo exists
+  kubernetes.core.helm_repository:
+    name: bitnami
+    repo_url: https://charts.bitnami.com/bitnami
+
+- name: Ensure metallb is installed
+  kubernetes.core.helm:
+    name: metallb
+    namespace: metallb-system
+    create_namespace: true
+    chart_ref: bitnami/metallb
+    chart_version: 4.1.13
+
+# TODO: L2Advertisement and IPAddressPool cannot be deployed right after provision-metallb is installed.
+# TODO: Find the cause and implement proper waiting instead of a random timeout
+- name: Wait for metallb to become ready
+  wait_for:
+    timeout: 120
+
+- name: Ensure IPAddressPool is installed
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: metallb.io/v1beta1
+      kind: IPAddressPool
+      metadata:
+        name: default-ipaddresspool
+        namespace: metallb-system
+      spec:
+        addresses:
+          - 10.0.204.1-10.0.204.254
+
+- name: Ensure L2Advertisement is installed
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: metallb.io/v1beta1
+      kind: L2Advertisement
+      metadata:
+        name: default-l2advertisement
+        namespace: metallb-system

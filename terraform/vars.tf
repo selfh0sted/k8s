@@ -1,4 +1,4 @@
-# user setup
+# user prepare-machineid
 
 variable "pm_api_url" {
     description = "Proxmox API endpoint, e.g. https://<ip>:8006/api2/json"
@@ -47,7 +47,7 @@ variable "ssh_key" {
 }
 
 
-# cluster setup
+# cluster prepare-machineid
 
 variable "controlplane_count" {
     description = "Number of controlplane nodes"

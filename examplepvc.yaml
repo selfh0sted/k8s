@@ -1,0 +1,27 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nginx-pvc
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Mi
+#---
+#kind: Pod
+#apiVersion: v1
+#metadata:
+#  name: nginx
+#spec:
+#  containers:
+#    - name: nginx
+#      image: nginx
+#      volumeMounts:
+#        - name: nginx-pvc
+#          mountPath: "/var/www/html"
+#  volumes:
+#    - name: nginx-pvc
+#      persistentVolumeClaim:
+#        claimName: nginx-pvc

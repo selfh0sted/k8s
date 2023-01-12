@@ -1,0 +1,27 @@
+- name: Ensure nfs Helm Repo exists
+  kubernetes.core.helm_repository:
+    name: nfs-subdir-external-provisioner
+    repo_url: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
+
+- name: Ensure nfs-provisioner is installed
+  kubernetes.core.helm:
+    name: nfs-provisioner
+    namespace: nfs-provisioner
+    create_namespace: true
+    chart_ref: nfs-subdir-external-provisioner/nfs-subdir-external-provisioner
+    chart_version: 4.0.17
+    values:
+      nfs:
+        server: 10.0.187.1
+        path: /mnt/nfs
+      storageClass:
+        defaultClass: true
+        name: nfs
+        provisionerName: nfs-provisioner
+- name: KeyCloak
+  kubernetes.core.helm:
+    name: keycloak
+    namespace: keycloak
+    create_namespace: true
+    chart_ref: bitnami/keycloak
+

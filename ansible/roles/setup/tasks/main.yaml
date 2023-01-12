@@ -1,8 +1,0 @@
-- name: Ensure that /etc/machine-id is absent
-  become: yes
-  ansible.builtin.file:
-    path: /etc/machine-id
-    state: absent
-- name: Ensure that /etc/machine-id gets populated
-  become: yes
-  shell: systemd-machine-id-setup

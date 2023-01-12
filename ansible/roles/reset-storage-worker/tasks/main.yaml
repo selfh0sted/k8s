@@ -1,0 +1,4 @@
+- name: Ensure "dataDirHostPath" is absent
+  ansible.builtin.file:
+    path: /var/lib/rook
+    state: absent

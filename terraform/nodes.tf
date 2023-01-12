@@ -29,3 +29,18 @@ module "worker" {
     ipaddress = "${var.worker_ip_addresses}${count.index+1}/16"
     gateway = "10.0.0.1"
 }
+module "nfs" {
+    count = 1
+    memory = 2048
+    cores = 2
+    source = "./nfsnode"
+    ssh_key = var.ssh_key
+    name = "k8s-nfs${count.index}"
+    type = "nfs"
+    user = var.vm_user
+    template = var.vm_template
+    countIndex = count.index
+    pm_target_node = var.pm_target_node
+    ipaddress = "10.0.187.${count.index+1}/16"
+    gateway = "10.0.0.1"
+}

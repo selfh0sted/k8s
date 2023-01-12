@@ -24,6 +24,12 @@ resource "proxmox_vm_qemu" "k8s-node" {
         size = "10G"
     }
 
+    disk {
+        type = "virtio"
+        storage = "local-lvm"
+        size = "100G"
+    }
+
     # Clone Source
     clone = var.template
     full_clone = false

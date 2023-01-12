@@ -1,0 +1,20 @@
+#- name: Ensure Rook Helm Repo is absent
+#  kubernetes.core.helm_repository:
+#    name: rook-release
+#    repo_url: https://charts.rook.io/release
+#    state: absent
+#
+#- name: Ensure rook-operator is absent
+#  kubernetes.core.helm:
+#    name: rook-ceph
+#    namespace: rook-ceph
+#    state: absent
+#- name: Ensure Ceph Cluster is absent
+#  kubernetes.core.k8s:
+#    state: present
+#    api_version: ceph.rook.io/v1
+#    kind: CephCluster
+#    name: rook-ceph
+#    namespace: rook-ceph
+
+

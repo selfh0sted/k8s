@@ -1,0 +1,15 @@
+- hosts: all
+  roles:
+    - role: prepare-machineid
+      tags:
+        - config
+- hosts: worker
+  roles:
+    - role: prepare-nfs
+# Loadbalancer
+#- hosts: controlplane
+#  roles:
+#    - role: prepare-loadbalancer
+#      tags:
+#        - never
+#        - loadbalancer
