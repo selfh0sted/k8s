@@ -75,7 +75,7 @@
           server: https://acme-v02.api.letsencrypt.org/directory
           email: danielrichter@posteo.de
           privateKeySecretRef:
-            name: letsencrypt-prod-secret-key
+            name: letsencrypt-prod-private-key
           solvers:
             - http01:
                 ingress:
